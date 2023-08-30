@@ -10,7 +10,7 @@
         <div class="col-md-12">
 
             <div class="card card-primary">
-                <div class="card-header ">
+                <div class="card-header">
                     <h3 class="card-title">Application Create</h3>
                 </div>
 
@@ -133,7 +133,65 @@
                             <label>Detail Job Application: </label>
                             <textarea id="job-detail" name="detail">{{ old('detail') }}</textarea>
                         </div>
+
+                        <div id="contact">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="name">Contact Person Name</label>
+                                        <input type="text" class="form-control" value="{{ old('name') }}"
+                                            id="name" name="name" placeholder="Enter Person Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="role">Contact Person Role</label>
+                                        <input type="text" class="form-control" value="{{ old('role') }}"
+                                            id="role" name="role" placeholder="Enter Person Role">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="email">Contact Email</label>
+                                        <input type="email" class="form-control" value="{{ old('email') }}"
+                                            id="email" name="email" placeholder="Enter Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="text" class="form-control" value="{{ old('phone') }}"
+                                            id="phone" name="phone" placeholder="Enter Phone Number">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="social_link">Social Link</label>
+                                        <input type="text" class="form-control" value="{{ old('social_link') }}"
+                                            id="social_link" name="social_link" placeholder="Enter Social Link">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="note">Note</label>
+                                        <textarea name="note" class="form-control" id="note" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-danger remove-contact-person float-right">Remove Contact</button>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div id="newcontact">
+                        </div>
+                        <button type="button" class="btn btn-info" id="addContactPerson">Add Contact</button>
+
+
                     </div>
+
 
                     <div class="card-footer">
                         <a href="{{ route('application.index') }}" class="btn btn-warning">Cancle</a>
@@ -160,5 +218,23 @@
                 height: 300
             })
         })
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            let contactPersonIndex = 0;
+            let html = $("#contact").html();
+            console.log(html)
+
+            $("#addContactPerson").click(function() {
+                $("#newcontact").append(html);
+            });
+
+            $("#newcontact").on('click', '.remove-contact-person', function() {
+                $(this).closest('.row').remove();
+            });
+            // console.log(newContactPerson)
+
+        });
     </script>
 @endpush

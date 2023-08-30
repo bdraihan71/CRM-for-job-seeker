@@ -41,7 +41,7 @@
                                     <td>{{ $application->salary($application->salary_range)['minSalary'] }} -
                                         {{ $application->salary($application->salary_range)['maxSalary'] }}</td>
                                     <td>{{ $application->application_last_date }}</td>
-                                    <td>{{ $application->job_title }}</td>
+                                    <td style="width:38%">{{ $application->job_title }}</td>
                                     <td style="width:11%">
                                         <a href="{{route('application.show', $application->id)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                         <button class="btn btn-primary" data-toggle="modal"

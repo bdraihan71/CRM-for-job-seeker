@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('role')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->date('last_interaction_date')->nullable();
-            $table->string('note')->nullable(); //something note about this contact
+            $table->string('social_link')->nullable();
+            $table->text('note')->nullable(); //something note about this contact
             $table->softDeletes();
             $table->timestamps();
 
