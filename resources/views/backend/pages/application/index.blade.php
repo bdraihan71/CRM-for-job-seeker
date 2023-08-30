@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-    
 @endprepend
 @section('content')
     <div class="row mb-2">
@@ -15,7 +14,8 @@
                 <div class="card-header">
                     <h3 class="card-title">Application List</h3>
 
-                    <a href="{{route('application.create')}}" class="btn btn-block btn-primary float-right col-2">Create</a>
+                    <a href="{{ route('application.create') }}"
+                        class="btn btn-block btn-primary float-right col-2">Create</a>
                 </div>
                 <div class="card-body">
                     <table id="application_datatable" class="table table-bordered table-striped">
@@ -38,11 +38,13 @@
                                     <td>{{ $application->country->name }}</td>
                                     <td>{{ $application->matchJobNature($application->job_nature) }}</td>
                                     <td>{{ $application->matchOfficeType($application->office_type) }}</td>
-                                    <td>{{ $application->salary($application->salary_range)['minSalary']}} - {{ $application->salary($application->salary_range)['maxSalary']}}</td>
+                                    <td>{{ $application->salary($application->salary_range)['minSalary'] }} -
+                                        {{ $application->salary($application->salary_range)['maxSalary'] }}</td>
                                     <td>{{ $application->application_last_date }}</td>
                                     <td>{{ $application->job_title }}</td>
-                                    <td>
-                                        <button class="btn btn-info" data-toggle="modal"
+                                    <td style="width:11%">
+                                        <a href="{{route('application.show', $application->id)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                        <button class="btn btn-primary" data-toggle="modal"
                                             data-target="#edit-application-{{ $application->id }}"><i
                                                 class="fas fa-edit"></i></button>
                                         <button class="btn btn-danger" data-toggle="modal"
@@ -50,7 +52,11 @@
                                                 class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
-                                @include('backend.pages.common.delete_modal', ['id' => $application->id, 'route' => 'application.destroy', 'message' => 'Application' ])
+                                @include('backend.pages.common.delete_modal', [
+                                    'id' => $application->id,
+                                    'route' => 'application.destroy',
+                                    'message' => 'Application',
+                                ])
                                 {{-- @include('backend.pages.application.common.edit_modal', ['item' => $application]) --}}
                             @endforeach
                         </tbody>

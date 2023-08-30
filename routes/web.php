@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/application', [ApplicationController::class, 'index'])->name('application.index');
     Route::get('/application/create', [ApplicationController::class, 'create'])->name('application.create');
+    Route::get('/application/{id}', [ApplicationController::class, 'show'])->name('application.show');
     Route::post('/application', [ApplicationController::class, 'store'])->name('application.store');
     Route::put('/application/{id}', [ApplicationController::class, 'update'])->name('application.update');
     Route::delete('/application/{id}', [ApplicationController::class, 'destroy'])->name('application.destroy');

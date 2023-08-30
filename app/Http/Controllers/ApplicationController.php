@@ -32,6 +32,16 @@ class ApplicationController extends Controller
             'officeTypes' =>  $officeTypes
         ]);
     }
+
+    public function show($id)
+    {
+        try {
+            $application = Application::findOrFail($id);
+            return view('backend.pages.application.show')->with('application', $application);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while fetching application.');
+        }
+    }
     public function store(ApplicationFromRequest $request)
     {
 
