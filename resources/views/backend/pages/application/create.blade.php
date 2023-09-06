@@ -135,7 +135,7 @@
                         </div>
 
 
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="name">Contact Person Name</label>
@@ -177,7 +177,7 @@
                                     <textarea name="note" class="form-control" id="note[]" rows="5"></textarea>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="card-footer">

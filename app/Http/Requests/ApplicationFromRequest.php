@@ -23,11 +23,11 @@ class ApplicationFromRequest extends FormRequest
     {
         return [
             'job_title' => 'required|string|max:255',
-            'company_name' => 'string|max:255',
-            'job_source' => 'string|max:255',
-            'location' => 'string|max:255',
+            'company_name' => 'nullable|string|max:255',
+            'job_source' => 'nullable|string|max:255',
+            'location' => 'nullable|string|max:255',
             'country_id' => 'required|integer',
-            'detail' => 'string|max:5000',
+            'detail' => 'nullable|string|max:5000',
         ];
     }
 }

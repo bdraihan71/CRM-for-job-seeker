@@ -14,7 +14,16 @@ class Application extends Model
     protected $fillable = [
         'user_id',
         'job_title',
-        'company_name'
+        'company_name',
+        'job_source',
+        'location',
+        'country_id',
+        'job_nature',
+        'office_type',
+        'salary_range',
+        'application_last_date',
+        'current_stage_id',
+        'detail'
     ];
 
     protected $casts = [
