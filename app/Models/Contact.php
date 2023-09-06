@@ -20,4 +20,14 @@ class Contact extends Model
         'social_link',
         'note'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function application()
+    {
+        return $this->belongsTo(Application::class);
+    }
 }

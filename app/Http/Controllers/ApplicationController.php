@@ -64,6 +64,16 @@ class ApplicationController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        try {
+            $application = $this->applicationRepository->getApplicationById($id);
+            dd($application);
+        } catch (Exception $exception) {
+            Log::error("edit application error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
+            return redirect()->back()->with('error', 'An error occurred while Edit the application.');
+        }
+    }
     public function update(Request $request, $id)
     {
 
@@ -80,10 +90,10 @@ class ApplicationController extends Controller
     public function destroy($id)
     {
         try {
-            $application = Application::findOrFail($id);
-            $application->delete();
+            $this->applicationRepository->deleteApplication($id);
             return redirect()->route('application.index')->with('warning', 'Application Deleted Successfully');
-        } catch (\Exception $e) {
+        } catch (Exception $exception) {
+            Log::error("delete application error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
             return redirect()->back()->with('error', 'An error occurred while deleting the application.');
         }
     }

@@ -30,6 +30,9 @@ class Application extends Model
         'salary_range' => 'json',
     ];
 
+    protected $cascadeDeletes = ['contacts'];
+
+
     public function matchJobNature($job_nature)
     {
         return match ($job_nature) {
@@ -69,4 +72,15 @@ class Application extends Model
     {
         return $this->belongsTo(Country::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
+
 }

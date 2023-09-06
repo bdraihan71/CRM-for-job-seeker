@@ -103,5 +103,13 @@ class ApplicationRepository implements ApplicationRepositoryInterface
     }
     public function deleteApplication($applicationId)
     {
+        try {
+            $application = Application::findOrFail($applicationId);
+            $application->delete();
+            $application->contacts()->delete();
+        } catch (Exception $exception) {
+            Log::error("deleteApplication error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
+            throw new Exception($exception->getMessage());
+        }
     }
 }
