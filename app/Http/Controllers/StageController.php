@@ -20,19 +20,10 @@ class StageController extends Controller
 
     public function store(StageFromRequest $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'stage_name' => 'required'
-        // ]);
-
-
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator->errors());
-        // }
-
         try {
-            $Stage = new Stage();
-            $Stage->stage_name = $request->input('stage_name');
-            $Stage->save();
+            Stage::create([
+                'stage_name' => $request->stage_name
+            ]);
             return redirect()->route('stage.index')->with('message', 'Stage added Successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while adding the stage.');
@@ -43,8 +34,9 @@ class StageController extends Controller
     {
         try {
             $stage = Stage::findOrFail($id);
-            $stage->stage_name = $request->input('stage_name');
-            $stage->save();
+            $stage->update([
+                'stage_name' => $request->stage_name
+            ]);
             return redirect()->route('stage.index')->with('info', 'Stage Updated Successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while updating the stage.');

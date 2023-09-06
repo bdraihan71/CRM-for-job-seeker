@@ -35,17 +35,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/stage', [StageController::class, 'index'])->name('stage.index');
-    Route::post('/stage', [StageController::class, 'store'])->name('stage.store');
-    Route::put('/stage/{id}', [StageController::class, 'update'])->name('stage.update');
-    Route::delete('/stage/{id}', [StageController::class, 'destroy'])->name('stage.destroy');
-
-    Route::get('/application', [ApplicationController::class, 'index'])->name('application.index');
-    Route::get('/application/create', [ApplicationController::class, 'create'])->name('application.create');
-    Route::get('/application/{id}', [ApplicationController::class, 'show'])->name('application.show');
-    Route::post('/application', [ApplicationController::class, 'store'])->name('application.store');
-    Route::put('/application/{id}', [ApplicationController::class, 'update'])->name('application.update');
-    Route::delete('/application/{id}', [ApplicationController::class, 'destroy'])->name('application.destroy');
+    Route::resource('/stage', StageController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('/application', ApplicationController::class);
 
 });
 

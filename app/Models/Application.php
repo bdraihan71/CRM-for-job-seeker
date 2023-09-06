@@ -11,6 +11,12 @@ class Application extends Model
     use HasFactory, SoftDeletes;
 
 
+    protected $fillable = [
+        'user_id',
+        'job_title',
+        'company_name'
+    ];
+
     protected $casts = [
         'salary_range' => 'json',
     ];

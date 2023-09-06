@@ -10,4 +10,6 @@ class Stage extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['stage_name'];
+
 }
