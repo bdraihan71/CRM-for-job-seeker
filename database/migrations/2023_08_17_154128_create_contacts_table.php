@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('application_id');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('application_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('role')->nullable();
             $table->string('email')->nullable();
@@ -22,8 +23,6 @@ return new class extends Migration
             $table->text('note')->nullable(); //something note about this contact
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('application_id')->references('id')->on('applications')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

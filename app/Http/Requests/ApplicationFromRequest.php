@@ -28,6 +28,9 @@ class ApplicationFromRequest extends FormRequest
             'location' => 'nullable|string|max:255',
             'country_id' => 'required|integer',
             'detail' => 'nullable|string|max:5000',
+            'name' => 'required|string|max:255',
+            'social_link' => 'nullable|string|max:255',
+            'note' => 'nullable|string|max:5000',
         ];
     }
 }

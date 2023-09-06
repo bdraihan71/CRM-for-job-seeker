@@ -135,49 +135,49 @@
                         </div>
 
 
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="name">Contact Person Name</label>
                                     <input type="text" class="form-control" value="{{ old('name') }}"
-                                        id="name" name="name[]" placeholder="Enter Person Name">
+                                        id="name" name="name" placeholder="Enter Person Name">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="role">Contact Person Role</label>
                                     <input type="text" class="form-control" value="{{ old('role') }}"
-                                        id="role" name="role[]" placeholder="Enter Person Role">
+                                        id="role" name="role" placeholder="Enter Person Role">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="email">Contact Email</label>
                                     <input type="email" class="form-control" value="{{ old('email') }}"
-                                        id="email" name="email[]" placeholder="Enter Email">
+                                        id="email" name="email" placeholder="Enter Email">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="phone">Phone Number</label>
                                     <input type="text" class="form-control" value="{{ old('phone') }}"
-                                        id="phone" name="phone[]" placeholder="Enter Phone Number">
+                                        id="phone" name="phone" placeholder="Enter Phone Number">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="social_link">Social Link</label>
                                     <input type="text" class="form-control" value="{{ old('social_link') }}"
-                                        id="social_link" name="social_link[]" placeholder="Enter Social Link">
+                                        id="social_link" name="social_link" placeholder="Enter Social Link">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="note">Note</label>
-                                    <textarea name="note" class="form-control" id="note[]" rows="5"></textarea>
+                                    <textarea name="note" class="form-control" id="note" rows="5"></textarea>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
 
                     <div class="card-footer">

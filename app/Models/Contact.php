@@ -9,4 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Contact extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'user_id',
+        'application_id',
+        'name',
+        'role',
+        'email',
+        'phone',
+        'social_link',
+        'note'
+    ];
 }
