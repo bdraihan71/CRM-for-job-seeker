@@ -23,7 +23,8 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="job_title">Job Title</label>
-                                    <input type="text" class="form-control" value="{{ old('job_title') }}" id="job_title"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('job_title', $application->job_title) }}" id="job_title"
                                         name="job_title" placeholder="Enter Job Title">
                                 </div>
                             </div>
@@ -31,8 +32,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="company_name">Company Name</label>
-                                    <input type="text" class="form-control" value="{{ old('company_name') }}"
-                                        id="company_name" name="company_name" placeholder="Enter Company Name">
+                                    <input type="text" class="form-control"
+                                        value="{{ old('company_name', $application->company_name) }}" id="company_name"
+                                        name="company_name" placeholder="Enter Company Name">
                                 </div>
                             </div>
 
@@ -40,15 +42,17 @@
                                 <div class="form-group">
                                     <label for="job_source">Job Source</label>
                                     <input type="text" class="form-control" id="job_source"
-                                        value="{{ old('job_source') }}" name="job_source" placeholder="Enter Job Source">
+                                        value="{{ old('job_source', $application->job_source) }}" name="job_source"
+                                        placeholder="Enter Job Source">
                                 </div>
                             </div>
 
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="location">Location</label>
-                                    <input type="text" class="form-control" id="location" value="{{ old('location') }}"
-                                        name="location" placeholder="Enter Location">
+                                    <input type="text" class="form-control" id="location"
+                                        value="{{ old('location', $application->location) }}" name="location"
+                                        placeholder="Enter Location">
                                 </div>
                             </div>
                         </div>
@@ -105,7 +109,8 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="application_last_date">Application Last Date</label>
-                                    <input type="date" class="form-control" value="{{ old('application_last_date') }}"
+                                    <input type="date" class="form-control"
+                                        value="{{ old('application_last_date', $application->application_last_date) }}"
                                         id="application_last_date" name="application_last_date">
                                 </div>
                             </div>
@@ -131,53 +136,59 @@
 
                         <div class="form-group">
                             <label>Detail Job Application: </label>
-                            <textarea id="job-detail" name="detail">{{ old('detail') }}</textarea>
+                            <textarea id="job-detail" name="detail">{{ old('detail', $application->detail) }}</textarea>
                         </div>
 
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="name">Contact Person Name</label>
-                                    <input type="text" class="form-control" value="{{ old('name') }}"
-                                        id="name" name="name" placeholder="Enter Person Name">
+                        @foreach ($application->contacts as $contact)
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="name">Contact Person Name</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ old('name', $contact->name) }}" id="name" name="name"
+                                            placeholder="Enter Person Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="role">Contact Person Role</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ old('role', $contact->role) }}" id="role" name="role"
+                                            placeholder="Enter Person Role">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="email">Contact Email</label>
+                                        <input type="email" class="form-control"
+                                            value="{{ old('email', $contact->email) }}" id="email"
+                                            name="email" placeholder="Enter Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ old('phone', $contact->phone) }}" id="phone"
+                                            name="phone" placeholder="Enter Phone Number">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="social_link">Social Link</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ old('social_link', $contact->social_link) }}" id="social_link"
+                                            name="social_link" placeholder="Enter Social Link">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="note">Note</label>
+                                        <textarea name="note" class="form-control" id="note" rows="5">{{ old('note', $contact->note) }}</textarea>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="role">Contact Person Role</label>
-                                    <input type="text" class="form-control" value="{{ old('role') }}"
-                                        id="role" name="role" placeholder="Enter Person Role">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="email">Contact Email</label>
-                                    <input type="email" class="form-control" value="{{ old('email') }}"
-                                        id="email" name="email" placeholder="Enter Email">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" value="{{ old('phone') }}"
-                                        id="phone" name="phone" placeholder="Enter Phone Number">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="social_link">Social Link</label>
-                                    <input type="text" class="form-control" value="{{ old('social_link') }}"
-                                        id="social_link" name="social_link" placeholder="Enter Social Link">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="note">Note</label>
-                                    <textarea name="note" class="form-control" id="note" rows="5">{{ old('note') }}</textarea>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                     <div class="card-footer">

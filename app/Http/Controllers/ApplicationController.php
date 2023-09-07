@@ -31,11 +31,11 @@ class ApplicationController extends Controller
     public function create()
     {
         try {
-            $application = $this->applicationRepository->showCreateApplicationPage();
+            $data = $this->applicationRepository->showCreateApplicationPage();
             return view('backend.pages.application.create')->with([
-                'countries' => $application['countries'],
-                'jobNatures' =>  $application['jobNatures'],
-                'officeTypes' =>  $application['officeTypes']
+                'countries' => $data['countries'],
+                'jobNatures' =>  $data['jobNatures'],
+                'officeTypes' =>  $data['officeTypes']
             ]);
         } catch (Exception $exception) {
             Log::error("create application error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
@@ -67,8 +67,14 @@ class ApplicationController extends Controller
     public function edit($id)
     {
         try {
+            $data = $this->applicationRepository->showCreateApplicationPage();
             $application = $this->applicationRepository->getApplicationById($id);
-            dd($application);
+            return view('backend.pages.application.edit')->with([
+                'countries' => $data['countries'],
+                'jobNatures' =>  $data['jobNatures'],
+                'officeTypes' =>  $data['officeTypes'],
+                'application' => $application
+            ]);
         } catch (Exception $exception) {
             Log::error("edit application error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
             return redirect()->back()->with('error', 'An error occurred while Edit the application.');

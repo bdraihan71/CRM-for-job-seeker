@@ -44,9 +44,7 @@
                                     <td style="width:38%">{{ $application->job_title }}</td>
                                     <td style="width:11%">
                                         <a href="{{route('application.show', $application->id)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                            data-target="#edit-application-{{ $application->id }}"><i
-                                                class="fas fa-edit"></i></button>
+                                        <a href="{{route('application.edit', $application->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                         <button class="btn btn-danger" data-toggle="modal"
                                             data-target="#delete-modal-{{ $application->id }}"><i
                                                 class="fas fa-trash-alt"></i></button>
