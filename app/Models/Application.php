@@ -77,9 +77,9 @@ class Application extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function contacts()
+    public function contact()
     {
-        return $this->hasMany(Contact::class);
+        return $this->hasOne(Contact::class);
     }
 
 

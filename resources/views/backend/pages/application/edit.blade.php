@@ -64,7 +64,7 @@
                                     <select class="custom-select" name="country_id">
                                         <option value="">Please select country</option>
                                         @foreach ($countries as $country)
-                                            @if (old('country_id') == $country->id)
+                                            @if (old('country_id', $application->country_id) == $country->id)
                                                 <option value="{{ $country->id }}" selected>{{ $country->name }}</option>
                                             @else
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -80,7 +80,7 @@
                                     <select class="custom-select" name="job_nature">
                                         <option value="">Please select Job Nature</option>
                                         @foreach ($jobNatures as $key => $jobNature)
-                                            @if (old('job_nature') == $key)
+                                            @if (old('job_nature', $application->job_nature) == $key)
                                                 <option value="{{ $key }}" selected>{{ $jobNature }}</option>
                                             @else
                                                 <option value="{{ $key }}">{{ $jobNature }}</option>
@@ -96,7 +96,7 @@
                                     <select class="custom-select" name="office_type">
                                         <option value="">Please select Office Type</option>
                                         @foreach ($officeTypes as $key => $officeType)
-                                            @if (old('office_type') == $key)
+                                            @if (old('office_type', $application->office_type) == $key)
                                                 <option value="{{ $key }}" selected>{{ $officeType }}</option>
                                             @else
                                                 <option value="{{ $key }}">{{ $officeType }}</option>
@@ -121,12 +121,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" id="salary_min"
-                                                value="{{ old('salary_min') }}" name="salary_min"
+                                                value="{{ old('salary_min', $application->salary($application->salary_range)['minSalary']) }}" name="salary_min"
                                                 placeholder="Enter Minimum Salary">
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" id="salary_max"
-                                                value="{{ old('salary_max') }}" name="salary_max"
+                                                value="{{ old('salary_max', $application->salary($application->salary_range)['maxSalary']) }}" name="salary_max"
                                                 placeholder="Enter Maximum salary">
                                         </div>
                                     </div>
@@ -139,56 +139,55 @@
                             <textarea id="job-detail" name="detail">{{ old('detail', $application->detail) }}</textarea>
                         </div>
 
-                        @foreach ($application->contacts as $contact)
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="name">Contact Person Name</label>
-                                        <input type="text" class="form-control"
-                                            value="{{ old('name', $contact->name) }}" id="name" name="name"
-                                            placeholder="Enter Person Name">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="role">Contact Person Role</label>
-                                        <input type="text" class="form-control"
-                                            value="{{ old('role', $contact->role) }}" id="role" name="role"
-                                            placeholder="Enter Person Role">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="email">Contact Email</label>
-                                        <input type="email" class="form-control"
-                                            value="{{ old('email', $contact->email) }}" id="email"
-                                            name="email" placeholder="Enter Email">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="phone">Phone Number</label>
-                                        <input type="text" class="form-control"
-                                            value="{{ old('phone', $contact->phone) }}" id="phone"
-                                            name="phone" placeholder="Enter Phone Number">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="social_link">Social Link</label>
-                                        <input type="text" class="form-control"
-                                            value="{{ old('social_link', $contact->social_link) }}" id="social_link"
-                                            name="social_link" placeholder="Enter Social Link">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="note">Note</label>
-                                        <textarea name="note" class="form-control" id="note" rows="5">{{ old('note', $contact->note) }}</textarea>
-                                    </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="name">Contact Person Name</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ old('name', $application->contact?->name) }}" id="name"
+                                        name="name" placeholder="Enter Person Name">
                                 </div>
                             </div>
-                        @endforeach
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="role">Contact Person Role</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ old('role', $application->contact?->role) }}" id="role"
+                                        name="role" placeholder="Enter Person Role">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="email">Contact Email</label>
+                                    <input type="email" class="form-control"
+                                        value="{{ old('email', $application->contact?->email) }}" id="email"
+                                        name="email" placeholder="Enter Email">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ old('phone', $application->contact?->phone) }}" id="phone"
+                                        name="phone" placeholder="Enter Phone Number">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="social_link">Social Link</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ old('social_link', $application->contact?->social_link) }}"
+                                        id="social_link" name="social_link" placeholder="Enter Social Link">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="note">Note</label>
+                                    <textarea name="note" class="form-control" id="note" rows="5">{{ old('note', $application->contact?->note) }}</textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-footer">
