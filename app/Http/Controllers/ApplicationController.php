@@ -73,6 +73,7 @@ class ApplicationController extends Controller
                 'countries' => $data['countries'],
                 'jobNatures' =>  $data['jobNatures'],
                 'officeTypes' =>  $data['officeTypes'],
+                'stages' =>  $data['stages'],
                 'application' => $application
             ]);
         } catch (Exception $exception) {
@@ -80,16 +81,14 @@ class ApplicationController extends Controller
             return redirect()->back()->with('error', 'An error occurred while Edit the application.');
         }
     }
-    public function update(Request $request, $id)
+    public function update(ApplicationFromRequest $request, $id)
     {
-
         try {
-            $application = Application::findOrFail($id);
-            $application->stage_name = $request->input('stage_name');
-            $application->save();
+            $this->applicationRepository->updateOldApplication($request, $id);
             return redirect()->route('application.index')->with('info', 'Application Updated Successfully');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while updating the application.');
+        } catch (Exception $exception) {
+            Log::error("Update application error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
+            return redirect()->back()->with('error', 'An error occurred while Updating the application.');
         }
     }
 

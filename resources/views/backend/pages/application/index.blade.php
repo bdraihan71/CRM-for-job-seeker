@@ -22,12 +22,13 @@
                         <thead>
                             <tr>
                                 <th>Serial Number</th>
+                                <th>Job Title</th>
+                                <th>Stage</th>
                                 <th>Country</th>
                                 <th>Job Nature</th>
                                 <th>Office Type</th>
                                 <th>Salary Range</th>
                                 <th>Last Date</th>
-                                <th>Job Title</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -35,13 +36,14 @@
                             @foreach ($applications as $application)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td style="width:35%">{{ $application->job_title }}</td>
+                                    <td>{{ $application->stage->stage_name }}</td>
                                     <td>{{ $application->country->name }}</td>
                                     <td>{{ $application->matchJobNature($application->job_nature) }}</td>
                                     <td>{{ $application->matchOfficeType($application->office_type) }}</td>
                                     <td>{{ $application->salary($application->salary_range)['minSalary'] }} -
                                         {{ $application->salary($application->salary_range)['maxSalary'] }}</td>
                                     <td>{{ $application->application_last_date }}</td>
-                                    <td style="width:38%">{{ $application->job_title }}</td>
                                     <td style="width:11%">
                                         <a href="{{route('application.show', $application->id)}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                         <a href="{{route('application.edit', $application->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
@@ -61,12 +63,13 @@
                         <tfoot>
                             <tr>
                                 <th>Serial Number</th>
+                                <th>Job Title</th>
+                                <th>Stage</th>
                                 <th>Country</th>
                                 <th>Job Nature</th>
                                 <th>Office Type</th>
                                 <th>Salary Range</th>
                                 <th>Last Date</th>
-                                <th>Job Title</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>

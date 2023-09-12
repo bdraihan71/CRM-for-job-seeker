@@ -82,5 +82,10 @@ class Application extends Model
         return $this->hasOne(Contact::class);
     }
 
+    public function stage()
+    {
+        return $this->belongsTo(Stage::class, 'current_stage_id', 'id');
+    }
+
 
 }

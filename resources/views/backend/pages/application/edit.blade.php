@@ -14,7 +14,8 @@
                     <h3 class="card-title">Application Create</h3>
                 </div>
 
-                <form method="POST" action="{{ route('application.store') }}">
+                <form method="POST" action="{{ route('application.update', $application->id) }}">
+                    @method('put')
                     @csrf
 
                     <div class="card-body">
@@ -29,7 +30,22 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Stage</label>
+                                    <select class="custom-select" name="current_stage_id">
+                                        @foreach ($stages as $stage)
+                                            @if (old('current_stage_id', $application->current_stage_id) == $stage->id)
+                                                <option value="{{ $stage->id }}" selected>{{ $stage->stage_name }}</option>
+                                            @else
+                                                <option value="{{ $stage->id }}">{{ $stage->stage_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="company_name">Company Name</label>
                                     <input type="text" class="form-control"
@@ -47,7 +63,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="location">Location</label>
                                     <input type="text" class="form-control" id="location"
@@ -192,7 +208,7 @@
 
                     <div class="card-footer">
                         <a href="{{ route('application.index') }}" class="btn btn-warning">Cancle</a>
-                        <button type="submit" class="btn btn-primary float-right">Submit</button>
+                        <button type="submit" class="btn btn-primary float-right">Update</button>
                     </div>
                 </form>
             </div>

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Application;
 use App\Models\Contact;
 use App\Models\Country;
+use App\Models\Stage;
 use App\Repositories\Interfaces\ApplicationRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -26,10 +27,12 @@ class ApplicationRepository implements ApplicationRepositoryInterface
     {
         try {
             $countries = Country::get();
+            $stages = Stage::get();
             $jobNatures = config('data.data.job_nature');
             $officeTypes = config('data.data.office_type');
             return [
                 'countries' => $countries,
+                'stages' => $stages,
                 'jobNatures' => $jobNatures,
                 'officeTypes' => $officeTypes
             ];
@@ -48,10 +51,14 @@ class ApplicationRepository implements ApplicationRepositoryInterface
         }
     }
 
+    public function generateSalary($salaryMin = 0, $salaryMax = 0)
+    {
+        return ['min' => $salaryMin, 'max' => $salaryMax];
+    }
+
     public function createApplication($request)
     {
         try {
-            $salary = ['min' => $request->input('salary_min'), 'max' => $request->input('salary_max')];
             $application = Application::create([
                 'user_id' => auth()->user()->id,
                 'job_title' => $request->job_title,
@@ -61,7 +68,7 @@ class ApplicationRepository implements ApplicationRepositoryInterface
                 'country_id' => $request->country_id,
                 'job_nature' => $request->job_nature,
                 'office_type' => $request->office_type,
-                'salary_range' => json_encode($salary),
+                'salary_range' => json_encode($this->generateSalary($request->input('salary_min'), $request->input('salary_max'))),
                 'application_last_date' => $request->application_last_date,
                 'detail' => $request->detail
             ]);
@@ -92,6 +99,7 @@ class ApplicationRepository implements ApplicationRepositoryInterface
             throw new Exception($exception->getMessage());
         }
     }
+
     public function createNewApplication($request)
     {
         try {
@@ -101,6 +109,61 @@ class ApplicationRepository implements ApplicationRepositoryInterface
             throw new Exception($exception->getMessage());
         }
     }
+
+    public function updateApplication($request, $id)
+    {
+        try {
+            $application = Application::findOrFail($id);
+            $application->update([
+                'user_id' => auth()->user()->id,
+                'job_title' => $request->job_title,
+                'current_stage_id' => $request->current_stage_id,
+                'company_name' => $request->company_name,
+                'job_source' => $request->job_source,
+                'location' => $request->location,
+                'country_id' => $request->country_id,
+                'job_nature' => $request->job_nature,
+                'office_type' => $request->office_type,
+                'salary_range' => json_encode($this->generateSalary($request->input('salary_min'), $request->input('salary_max'))),
+                'application_last_date' => $request->application_last_date,
+                'detail' => $request->detail
+            ]);
+        } catch (Exception $exception) {
+            Log::error("updateContact error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
+            throw new Exception($exception->getMessage());
+        }
+    }
+
+    public function updateContact($request, $id)
+    {
+        try {
+            $contact = Contact::where('application_id', $id)->first();
+            $contact->update([
+                'user_id' => auth()->user()->id,
+                'name' => $request->name,
+                'role' => $request->role,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'social_link' => $request->social_link,
+                'note' => $request->note
+            ]);
+        } catch (Exception $exception) {
+            Log::error("updateContact error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
+            throw new Exception($exception->getMessage());
+        }
+    }
+
+    public function updateOldApplication($request, $id)
+    {
+        try {
+            $this->updateApplication($request, $id);
+            $this->updateContact($request, $id);
+        } catch (Exception $exception) {
+            Log::error("updateApplication error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
+            throw new Exception($exception->getMessage());
+        }
+    }
+
     public function deleteApplication($applicationId)
     {
         try {
