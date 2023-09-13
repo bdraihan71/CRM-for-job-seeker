@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationFromRequest;
-use App\Models\Application;
-use App\Models\Country;
 use App\Repositories\Interfaces\ApplicationRepositoryInterface;
-use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Log;
 

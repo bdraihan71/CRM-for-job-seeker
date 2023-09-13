@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CommunicationHistory extends Model
 {
     use HasFactory, SoftDeletes;
+
+    public function application()
+    {
+        return $this->belongsTo(Application::class);
+    }
 }
