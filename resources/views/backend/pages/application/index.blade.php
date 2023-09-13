@@ -80,7 +80,6 @@
     </div>
 
 
-    @include('backend.pages.application.common.create_modal')
 @endsection
 @push('scripts')
     <!-- DataTables  & Plugins -->

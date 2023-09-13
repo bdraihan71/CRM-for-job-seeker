@@ -58,6 +58,30 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item {{ request()->routeIs('communication*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('communication*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tty"></i>
+                        <p>Communication Log<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('communication.index')}}" class="nav-link {{ request()->routeIs('communication.index') ? 'active' : '' }}">
+                                <i class="nav-icon far fas fa-list"></i>
+                                <p>Log List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('communication.create')}}" class="nav-link {{ request()->routeIs('communication.create') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-plus-square"></i>
+                                <p>Create Log</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>

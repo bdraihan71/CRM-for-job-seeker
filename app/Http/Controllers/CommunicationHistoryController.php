@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class CommunicationHistoryController extends Controller
 {
-    //
+    public function index()
+    {
+        dd(1);
+    }
 }

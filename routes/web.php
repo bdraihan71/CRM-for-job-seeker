@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\CommunicationHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StageController;
 use App\Models\Country;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('/stage', StageController::class)->only(['index', 'store', 'update', 'destroy']);
     Route::resource('/application', ApplicationController::class);
+    Route::resource('/communication', CommunicationHistoryController::class);
 
 });
 
