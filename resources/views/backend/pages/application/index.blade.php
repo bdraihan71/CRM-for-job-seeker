@@ -57,7 +57,6 @@
                                     'route' => 'application.destroy',
                                     'message' => 'Application',
                                 ])
-                                {{-- @include('backend.pages.application.common.edit_modal', ['item' => $application]) --}}
                             @endforeach
                         </tbody>
                         <tfoot>

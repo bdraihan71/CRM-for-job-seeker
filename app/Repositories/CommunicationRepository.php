@@ -170,7 +170,7 @@ class CommunicationRepository implements CommunicationRepositoryInterface
         try {
             $application = Application::findOrFail($applicationId);
             $application->delete();
-            $application->contacts()->delete();
+            $application->contact()->delete();
         } catch (Exception $exception) {
             Log::error("deleteApplication error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));
             throw new Exception($exception->getMessage());

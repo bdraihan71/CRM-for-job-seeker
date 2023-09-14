@@ -1,6 +1,6 @@
 @extends('backend.app')
-@section('title', 'Application Management')
-@section('page_title', 'Application')
+@section('title', 'Communication Management')
+@section('page_title', 'Communication')
 @prepend('styles')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
@@ -12,9 +12,9 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Application List</h3>
+                    <h3 class="card-title">Communication Logs</h3>
 
-                    <a href="{{ route('application.create') }}"
+                    <a href="{{ route('communication.create') }}"
                         class="btn btn-block btn-primary float-right col-2">Create</a>
                 </div>
                 <div class="card-body">

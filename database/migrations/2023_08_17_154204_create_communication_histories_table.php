@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('communication_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('application_id');
-            $table->unsignedBigInteger('contact_id');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('application_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('communication_date');
             $table->string('communication_type'); //email, phone face to face 
             $table->text('content');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('application_id')->references('id')->on('applications')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('contact_id')->references('id')->on('contacts')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
