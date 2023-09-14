@@ -24,18 +24,12 @@ class CommunicationRepository implements CommunicationRepositoryInterface
             throw new Exception($exception->getMessage());
         }
     }
-    public function showCreateApplicationPage()
+    public function showCreateCommunicationHistoryPage()
     {
         try {
-            $countries = Country::get();
-            $stages = Stage::get();
-            $jobNatures = config('data.data.job_nature');
-            $officeTypes = config('data.data.office_type');
+            $applications = Application::pluck('job_title', 'id');
             return [
-                'countries' => $countries,
-                'stages' => $stages,
-                'jobNatures' => $jobNatures,
-                'officeTypes' => $officeTypes
+                'applications' => $applications
             ];
         } catch (Exception $exception) {
             Log::error("create New Application error : " . json_encode($exception->getMessage()) . " User detail:" . auth()->user() . " trace : " . json_encode($exception->getTrace()));

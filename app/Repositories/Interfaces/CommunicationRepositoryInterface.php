@@ -5,7 +5,7 @@ namespace App\Repositories\Interfaces;
 interface CommunicationRepositoryInterface
 {
     public function getAllCommunicationHistories();
-    public function showCreateApplicationPage();
+    public function showCreateCommunicationHistoryPage();
     public function getApplicationById($applicationId);
     public function createApplication($request);
     public function generateSalary($salaryMin, $salaryMax);
